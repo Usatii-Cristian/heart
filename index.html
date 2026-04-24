@@ -68,13 +68,6 @@
     const centerY = 220;
     const scale = 16;
 
-    function isInsideHeart(px, py) {
-      const nx = (px - centerX) / scale;
-      const ny = -(py - centerY) / scale;
-      const val = Math.pow(nx*nx + ny*ny - 1, 3) - nx*nx * ny*ny*ny;
-      return val <= -0.05;
-    }
-
     const colors = [
       '#ff4b6e', '#ff6b8a', '#ff2255', '#ff8fa3',
       '#e8003d', '#ff3366', '#cc0044', '#ff99aa',
@@ -92,22 +85,7 @@
       createOutlineWord(x, y, -((outlineCount - i) / outlineCount) * DURATION);
     }
 
-    // center - "I love you Ariana" in grid, max 10, no overlap
-    const taken = [];
-    const STEP_X = 155;
-    const STEP_Y = 80;
-    let count = 0;
-
-    for (let py = 140; py < 480 && count < 10; py += STEP_Y) {
-      for (let px = 85; px < 550 && count < 10; px += STEP_X) {
-        if (!isInsideHeart(px, py)) continue;
-        const overlaps = taken.some(p => Math.abs(p.x - px) < STEP_X && Math.abs(p.y - py) < STEP_Y - 5);
-        if (overlaps) continue;
-        taken.push({ x: px, y: py });
-        createCenterWord(px, py, -(count / 10) * 5);
-        count++;
-      }
-    }
+    createCenterWord(centerX, centerY + 60);
 
     function createOutlineWord(x, y, delay) {
       const el = document.createElement('div');
@@ -129,20 +107,19 @@
       container.appendChild(el);
     }
 
-    function createCenterWord(x, y, delay) {
+    function createCenterWord(x, y) {
       const el = document.createElement('div');
       el.classList.add('center_word');
       el.textContent = 'I love you Ariana';
 
-      const color = colors[Math.floor(Math.random() * colors.length)];
-
-      el.style.left          = (x - 65) + 'px';
-      el.style.top           = (y - 9)  + 'px';
-      el.style.fontSize      = '0.85rem';
-      el.style.color         = color;
-      el.style.textShadow    = `0 0 12px ${color}`;
+      el.style.left          = '50%';
+      el.style.top           = y + 'px';
+      el.style.transform     = 'translateX(-50%)';
+      el.style.fontSize      = '1.6rem';
+      el.style.color         = '#ff4b6e';
+      el.style.textShadow    = '0 0 20px #ff4b6e, 0 0 8px #fff';
       el.style.fontWeight    = 'bold';
-      el.style.animationDelay = delay + 's';
+      el.style.letterSpacing = '2px';
 
       container.appendChild(el);
     }
