@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8">
-  <title>I Love You</title>
+  <title>Te iubesc Ariana</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -76,7 +76,7 @@
 
     const DURATION = 8;
 
-    // outline - "I love you" cascade
+    // outline - "Te iubesc" cascade
     const outlineCount = 80;
     for (let i = 0; i < outlineCount; i++) {
       const t = (i / outlineCount) * 2 * Math.PI;
@@ -90,7 +90,7 @@
     function createOutlineWord(x, y, delay) {
       const el = document.createElement('div');
       el.classList.add('love_word');
-      el.textContent = 'I love you';
+      el.textContent = 'Te iubesc';
 
       const color = colors[Math.floor(Math.random() * colors.length)];
       const size = 0.7 + Math.random() * 0.45;
@@ -110,7 +110,7 @@
     function createCenterWord(x, y) {
       const el = document.createElement('div');
       el.classList.add('center_word');
-      el.textContent = 'I love you Ariana';
+      el.textContent = 'Te iubesc Ariana';
 
       el.style.left          = '50%';
       el.style.top           = y + 'px';
